@@ -36,15 +36,25 @@ export class LoginPage {
   readonly email = new FormControl('', [Validators.required, Validators.email]);
   readonly checkbox = new FormControl('', [Validators.requiredTrue]);
   readonly password = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  readonly confirm_password = new FormControl('', [Validators.required, Validators.minLength(5)]);
   errorMessage = signal('');
 
   constructor(private router: Router) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
+      .subscribe(() => this.updateEmailErrorMessage());
+    merge(this.password.statusChanges, this.password.valueChanges)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updatePasswordErrorMessage());
+    merge(this.confirm_password.statusChanges, this.confirm_password.valueChanges)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updateConfirmPasswordErrorMessage());
+    merge(this.checkbox.statusChanges, this.checkbox.valueChanges)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updateCheckBoxErrorMessage());
   }
 
-  updateErrorMessage() {
+  updateEmailErrorMessage() {
     if (this.email.hasError('required')) {
       this.errorMessage.set('You must enter a value');
     } else if (this.email.hasError('email')) {
@@ -54,6 +64,36 @@ export class LoginPage {
     }
   }
 
+  updateCheckBoxErrorMessage() {
+    if (this.checkbox.hasError('required')) {
+      this.errorMessage.set('You must agree');
+    }
+    else {
+      this.errorMessage.set('');
+    }
+  }
+
+  updatePasswordErrorMessage() {
+    if (this.password.hasError('required')) {
+      this.errorMessage.set('You must enter a value');
+    } else if (this.password.hasError('password')) {
+      this.errorMessage.set('Not a valid password');
+    } else {
+      this.errorMessage.set('');
+    }
+  }
+
+  updateConfirmPasswordErrorMessage() {
+    if (this.confirm_password.hasError('required')) {
+      this.errorMessage.set('You must enter a value');
+    } else if (this.confirm_password.hasError('password')) {
+      this.errorMessage.set('Not a valid password');
+    } else {
+      this.errorMessage.set('');
+    }
+  }
+
+  
   hide = signal(true);
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());

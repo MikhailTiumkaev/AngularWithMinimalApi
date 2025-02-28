@@ -7,8 +7,7 @@
     <input
       matInput
       [formControl]="email"
-      (blur)="updateErrorMessage()"
-      required
+      (blur)="updateEmailErrorMessage()"
     />
     @if (email.invalid) {
       <mat-error>{{errorMessage()}}</mat-error>
@@ -19,7 +18,12 @@
 <section> 
   <mat-label>Password</mat-label>
   <mat-form-field>
-    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <input 
+      matInput 
+      [type]="hide() ? 'password' : 'text'" 
+      [formControl]="password"
+      (blur)="updatePasswordErrorMessage()"
+    />
     <button
       mat-icon-button
       matSuffix
@@ -29,6 +33,9 @@
     >
       <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
+    @if (password.invalid) {
+      <mat-error>{{errorMessage()}}</mat-error>
+    }
   </mat-form-field>
   </section> 
   
@@ -36,7 +43,12 @@
   <section> 
     <mat-label>Confirm Password</mat-label>
     <mat-form-field>
-        <input matInput [type]="hide() ? 'password' : 'text'" />
+        <input 
+          matInput 
+          [type]="hide() ? 'password' : 'text'"
+          [formControl]="confirm_password"
+          (blur)="updateConfirmPasswordErrorMessage()"
+        />
         <button
           mat-icon-button
           matSuffix
@@ -46,16 +58,28 @@
         >
           <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        @if (confirm_password.invalid) {
+          <mat-error>{{errorMessage()}}</mat-error>
+        }
       </mat-form-field>  
   </section>
 
   <section class="centered">
-    <mat-checkbox>Agree to work for food</mat-checkbox>
+    <mat-checkbox 
+        [formControl]="checkbox"
+        (blur)="updateCheckBoxErrorMessage()"     
+        checked="false"   
+      >
+      Agree to work for food
+      @if (checkbox.invalid) {
+        <mat-error>{{errorMessage()}}</mat-error>
+      }
+    </mat-checkbox>
+
   </section>
 
-  <section class="centered">    
-    
-    <a mat-flat-button href="./address" target="_self">Go to Step 2</a>
+  <section class="centered">        
+    <a [disabled]="email.invalid || password.invalid || confirm_password.invalid || checkbox.invalid" mat-flat-button href="./address" target="_self">Go to Step 2</a>
   </section>
 
 </form>
