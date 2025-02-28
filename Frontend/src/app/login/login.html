@@ -1,0 +1,61 @@
+<h3>Step 1</h3>
+<form (submit)="$event.preventDefault()"> 
+
+<section> 
+  <mat-label>Login</mat-label>
+  <mat-form-field>
+    <input
+      matInput
+      [formControl]="email"
+      (blur)="updateErrorMessage()"
+      required
+    />
+    @if (email.invalid) {
+      <mat-error>{{errorMessage()}}</mat-error>
+    }
+  </mat-form-field>
+</section> 
+
+<section> 
+  <mat-label>Password</mat-label>
+  <mat-form-field>
+    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="clickEvent($event)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  </section> 
+  
+
+  <section> 
+    <mat-label>Confirm Password</mat-label>
+    <mat-form-field>
+        <input matInput [type]="hide() ? 'password' : 'text'" />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>  
+  </section>
+
+  <section class="centered">
+    <mat-checkbox>Agree to work for food</mat-checkbox>
+  </section>
+
+  <section class="centered">    
+    
+    <a mat-flat-button href="./address" target="_self">Go to Step 2</a>
+  </section>
+
+</form>

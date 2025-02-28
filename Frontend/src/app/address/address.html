@@ -1,0 +1,29 @@
+<h3>Step 2</h3>
+<form (submit)="$event.preventDefault()"> 
+
+<section> 
+  <mat-label>Country</mat-label>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+</section> 
+<section> 
+  <mat-label>Province</mat-label>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select>
+      <mat-option value="one">First option</mat-option>
+      <mat-option value="two">Second option</mat-option>
+    </mat-select>
+  </mat-form-field>
+</section> 
+
+<section class="centered">
+  <button mat-flat-button>Save</button>
+</section>
+
+</form>
