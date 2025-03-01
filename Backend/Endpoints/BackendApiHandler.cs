@@ -9,8 +9,8 @@ public static class BackendApiHandler
 {
     public static RouteGroupBuilder MapBackendApiEndpoints(this RouteGroupBuilder routes)
     {
-        routes.MapPost("/users/", CreateUserRequestTask);
-        routes.MapGet("/contries/", GetContries);
+        routes.MapPost("/user/", CreateUserRequestTask);
+        routes.MapGet("/country/", GetContries);
         return routes;
     }
 
