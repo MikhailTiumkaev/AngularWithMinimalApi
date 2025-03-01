@@ -1,9 +1,14 @@
-import { Routes } from '@angular/router';
-import { AddressPage } from './address/address';
-import { LoginPage } from './login/login';
-
-export const routes: Routes = [
-    {path: 'address', component: AddressPage},    
-    {path: 'login', component: LoginPage},
-    {path: '', redirectTo: '/login', pathMatch: 'full'},
-];
+export const routes = [
+    {
+      path: '',
+      loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
+    },
+    {
+      path: 'login',
+      loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
+    },
+    {
+      path: 'address',
+      loadComponent: () => import('./address/address.component').then(m => m.AddressComponent)
+    }
+  ];

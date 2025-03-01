@@ -77,9 +77,14 @@
     </mat-checkbox>
 
   </section>
-
+  
   <section class="centered">        
-    <a [disabled]="email.invalid || password.invalid || confirm_password.invalid || checkbox.invalid" mat-flat-button href="./address" target="_self">Go to Step 2</a>
+    <button 
+      mat-flat-button 
+      (click)="navigateToStep2()" 
+      [disabled]="email.invalid || password.invalid || confirm_password.invalid || checkbox.invalid">
+      Go to Step 2
+    </button>
   </section>
 
 </form>

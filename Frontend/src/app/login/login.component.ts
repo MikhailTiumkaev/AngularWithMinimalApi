@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {merge} from 'rxjs';
@@ -8,14 +8,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import {MatStepperModule} from '@angular/material/stepper';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-login',
-  templateUrl: 'login.html',
-  styleUrl: 'login.css',
+  templateUrl: 'login.component.html',
+  styleUrl: 'login.component.css',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,20 +27,22 @@ import { CommonModule } from '@angular/common';
     MatInputModule, 
     MatSelectModule, 
     MatCheckboxModule,
-    MatButtonModule,
-    MatStepperModule
+    MatButtonModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class LoginPage {
+export class LoginComponent {
+  private dataService  = inject(DataService)
+  private route = inject(Router)
   readonly email = new FormControl('', [Validators.required, Validators.email]);
   readonly checkbox = new FormControl('', [Validators.requiredTrue]);
   readonly password = new FormControl('', [Validators.required, Validators.minLength(5)]);
   readonly confirm_password = new FormControl('', [Validators.required, Validators.minLength(5)]);
   errorMessage = signal('');
 
-  constructor(private router: Router) {
+
+  constructor() {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateEmailErrorMessage());
@@ -93,6 +96,14 @@ export class LoginPage {
     }
   }
 
+  navigateToStep2() {
+    const user: User = {
+      login: this.email.value!,
+      password: this.password.value!
+    };
+    this.dataService.changeUserData(user);
+    this.route.navigate(['/address']);
+  }
   
   hide = signal(true);
   clickEvent(event: MouseEvent) {

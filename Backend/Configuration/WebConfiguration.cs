@@ -5,6 +5,15 @@ public static class WebConfiguration
 {
     public static void AddWebServices(this IServiceCollection services)
     {
+        services.AddCors(options=>{
+            options.AddPolicy("CORSPolicy",
+            builder => {
+                builder
+                .AllowAnyHeader()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:4200");
+            });
+        });
         services.AddEndpointsApiExplorer();
         services.AddProblemDetails(
         options => {
