@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
 import { __values } from 'tslib';
 import { HttpClient } from '@angular/common/http';
 import { UserDTO } from '../models/user-dto';
@@ -9,12 +8,12 @@ import { UserDTO } from '../models/user-dto';
   providedIn: 'root'
 })
 export class DataService {
-  private userData = new BehaviorSubject<User>({} as User);
+  private userData = new BehaviorSubject<UserDTO>({} as UserDTO);
   currentUser = this.userData.asObservable();
 
   constructor(private httpClient: HttpClient) { }
 
-  changeUserData(user: User) {
+  changeUserData(user: UserDTO) {
     this.userData.next(user)
   }
 

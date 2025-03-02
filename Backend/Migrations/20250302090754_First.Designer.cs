@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackendApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250301070925_Initial")]
-    partial class Initial
+    [Migration("20250302090754_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,11 +182,7 @@ namespace BackendApi.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -194,10 +190,6 @@ namespace BackendApi.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Users");
                 });
@@ -209,25 +201,6 @@ namespace BackendApi.Migrations
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BackendApi.Models.User", b =>
-                {
-                    b.HasOne("BackendApi.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BackendApi.Models.Province", "Province")
-                        .WithMany()
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("BackendApi.Models.Country", b =>

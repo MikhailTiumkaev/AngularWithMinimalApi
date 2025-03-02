@@ -1,5 +1,5 @@
 export interface UserDTO {
     login: string;    
-    countryId: number;
-    provinceId: number;
+    countryId?: number;
+    provinceId?: number;
 }

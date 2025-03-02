@@ -2,8 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
 import { MatButtonModule } from '@angular/material/button';
+import { UserDTO } from '../models/user-dto';
 
 @Component({
   selector: 'app-login',
@@ -38,19 +38,12 @@ export class LoginComponent {
   constructor() { }
 
   navigateToStep2() {
-    console.log(this.loginForm.value);
-    const user: User = {
-       login: '',//this.loginForm.get("login")!.value!,
-       password: ''//this.password.value!
+    console.log(this.loginForm.get("login")!.value);
+    const user: UserDTO = {
+       login: this.loginForm.get("login")!.value!
     };
     this.dataService.changeUserData(user);
     this.route.navigate(['/address']);
-  }
-  
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
   }
 }
 

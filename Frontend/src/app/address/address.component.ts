@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Province } from '../models/province.model';
 import { DataService } from '../services/data.service';
-import { User } from '../models/user.model';
 import { UserDTO } from '../models/user-dto';
 import { Router } from '@angular/router';
 
@@ -31,7 +30,7 @@ export class AddressComponent implements OnInit  {
   formBuilder = inject(FormBuilder);
   private route = inject(Router)
   
-  user!: User;
+  user!: UserDTO;
   countries!: Country[];
   provinces!: Province[];
   country!: Country;
