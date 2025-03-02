@@ -31,6 +31,8 @@ export class AddressComponent implements OnInit, ErrorStateMatcher  {
   user!: User;
   countries!: Country[];
   provinces!: Province[];
+  country!: Country;
+  province!: Province;
   addressForm!: FormGroup;
   //matcher = new MyErrorStateMatcher();
   
@@ -44,38 +46,31 @@ export class AddressComponent implements OnInit, ErrorStateMatcher  {
   }
 
   ngOnInit(): void {
-      this.countryService.getCoutries().subscribe(result=> {
-        this.countries = result
-      });
       this.dataService.currentUser.subscribe((currentUser)=>
       {
         this.user = currentUser!
       });
-      // this.addressForm = this.formBuilder.group({
-      //   country: [null, Validators.required],
-      //   province: [null, Validators.required],
-      // });
+      this.countryService.getCoutries().subscribe(result=> {
+        this.countries = result
+      });
   }
 
   onAddressSubmit() {
     var userDTO ={} as UserDTO
     userDTO.login = this.user.login;
-    userDTO.countryId = (this.addressForm.get('country')!.value as Country).id
-    userDTO.provinceId = (this.addressForm.get('province')!.value as Province).id;
-
-    console.log(userDTO.login, userDTO.countryId, userDTO.provinceId)
+    userDTO.countryId = this.country.id
+    userDTO.provinceId = this.province.id
 
     this.dataService.SaveUser(userDTO);
-
-    // if (this.addressForm.valid) {
-    //   console.log(this.user.login)
-    //   console.log(this.addressForm.value);
-    // } else {
-    //   return;
-    // }
   }
+  
+  setProvince(e: any) {
+    this.province = e.value;
+  }
+  
 
-  showProvince(e: any) {
+  setCountryAndShowProvince(e: any) {
+    this.country = e.value;
     this.provinces = e.value.provinces;
   }
   

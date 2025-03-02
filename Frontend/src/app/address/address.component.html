@@ -5,7 +5,7 @@
   <mat-label>Country</mat-label>
   <mat-form-field>
     <mat-label>Select</mat-label>
-    <mat-select (selectionChange)="showProvince($event)">
+    <mat-select (selectionChange)="setCountryAndShowProvince($event)">
       <mat-option *ngFor="let country of countries" [value]="country">
         {{country.name}}
       </mat-option>
@@ -16,7 +16,7 @@
   <mat-label>Province</mat-label>
   <mat-form-field>
     <mat-label>Select</mat-label>
-    <mat-select>
+    <mat-select (selectionChange)="setProvince($event)">
       <mat-option *ngFor="let province of provinces" [value]="province">
         {{province.name}}
       </mat-option>
@@ -25,7 +25,7 @@
 </section> 
 
 <section class="centered">        
-  <button mat-flat-button>Save</button>
+  <button mat-flat-button (click)="onAddressSubmit()">Save</button>
 </section>
 
 </form>

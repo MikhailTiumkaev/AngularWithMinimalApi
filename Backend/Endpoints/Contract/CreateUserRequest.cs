@@ -1,3 +1,3 @@
 namespace BackendApi.Contract;
 
-public record struct CreateUserRequest(string Email, string Password, int CountryId, int ProvinceId);
+public record struct CreateUserRequest(string Login, int CountryId, int ProvinceId);

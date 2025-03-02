@@ -3,9 +3,8 @@ namespace BackendApi.Models
     public class User
     {
         public int Id { get; set; }
-        public string Email { get; set; } = default!;
-        public string Password { get; set; } = default!;
-        public Country Country { get; set; } = default!;
-        public Province Province { get; set; } = default!;
+        public string Login { get; set; } = default!;
+        public int CountryId { get; set; }
+        public int ProvinceId { get; set; }
     }    
 }

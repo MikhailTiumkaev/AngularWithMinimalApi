@@ -21,10 +21,9 @@ public static class BackendApiHandler
     {
         User user = new()
         {
-            Email = createUserRequest.Email,
-            Password = createUserRequest.Password,
-            //Country = createUserRequest.Country,
-            //Province = createUserRequest.Province
+            Login = createUserRequest.Login,
+            CountryId = createUserRequest.CountryId,
+            ProvinceId = createUserRequest.ProvinceId
         };
 
         dbContext.Users.Add(user);
