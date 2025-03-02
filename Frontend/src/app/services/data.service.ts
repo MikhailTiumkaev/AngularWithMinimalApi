@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
 import { __values } from 'tslib';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserDTO } from '../models/user-dto';
 
 @Injectable({
@@ -19,13 +19,8 @@ export class DataService {
   }
 
   SaveUser(user: UserDTO) {
-    const HTTP_OPTIONS = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    console.log(user);
-    this.httpClient.post<UserDTO>('http://localhost:5002/user', user, HTTP_OPTIONS).subscribe(config => {
-      console.log('Upserted user:', config);
+    this.httpClient.post<UserDTO>('http://localhost:5002/user', user).subscribe(response => {
+      console.log('Added user:', response);
     });
-    //return this.httpClient.post('http://localhost:5002/user', user, HTTP_OPTIONS);
   }
 }
