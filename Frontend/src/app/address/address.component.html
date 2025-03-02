@@ -1,0 +1,31 @@
+<h3>Step 2</h3>
+
+<form [formGroup]="addressForm" (ngSubmit)="onAddressSubmit()"> 
+<section>
+  <mat-label>Country</mat-label>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select (selectionChange)="setCountryAndShowProvince($event)">
+      <mat-option *ngFor="let country of countries" [value]="country">
+        {{country.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section> 
+<section> 
+  <mat-label>Province</mat-label>
+  <mat-form-field>
+    <mat-label>Select</mat-label>
+    <mat-select (selectionChange)="setProvince($event)">
+      <mat-option *ngFor="let province of provinces" [value]="province">
+        {{province.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section> 
+
+<section class="centered"> 
+  <button type="submit" mat-flat-button [disabled]="!addressForm.valid">Save</button>       
+</section>
+
+</form>

@@ -1,0 +1,23 @@
+h3 {
+    margin: 2rem;
+}
+
+form {
+    margin: 5rem;
+}
+
+section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    width: 50%;
+}
+
+section.centered {
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 20rem;
+}
