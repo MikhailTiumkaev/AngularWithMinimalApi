@@ -1,90 +1,23 @@
 <h3>Step 1</h3>
-<form (submit)="$event.preventDefault()"> 
 
-<section> 
-  <mat-label>Login</mat-label>
-  <mat-form-field>
-    <input
-      matInput
-      [formControl]="email"
-      (blur)="updateEmailErrorMessage()"
-    />
-    @if (email.invalid) {
-      <mat-error>{{errorMessage()}}</mat-error>
-    }
-  </mat-form-field>
-</section> 
-
-<section> 
-  <mat-label>Password</mat-label>
-  <mat-form-field>
-    <input 
-      matInput 
-      [type]="hide() ? 'password' : 'text'" 
-      [formControl]="password"
-      (blur)="updatePasswordErrorMessage()"
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="clickEvent($event)"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hide()"
-    >
-      <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-    @if (password.invalid) {
-      <mat-error>{{errorMessage()}}</mat-error>
-    }
-  </mat-form-field>
-  </section> 
-  
-
+<form [formGroup]="loginForm" (ngSubmit)="navigateToStep2()">
   <section> 
-    <mat-label>Confirm Password</mat-label>
-    <mat-form-field>
-        <input 
-          matInput 
-          [type]="hide() ? 'password' : 'text'"
-          [formControl]="confirm_password"
-          (blur)="updateConfirmPasswordErrorMessage()"
-        />
-        <button
-          mat-icon-button
-          matSuffix
-          (click)="clickEvent($event)"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide()"
-        >
-          <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        @if (confirm_password.invalid) {
-          <mat-error>{{errorMessage()}}</mat-error>
-        }
-      </mat-form-field>  
+    <label for="login">Login: </label>
+    <input id="login" type="text" formControlName="login">
+  </section> 
+  <section> 
+    <label for="Password">Password: </label>
+    <input id="password" type="password" formControlName="password">
   </section>
-
-  <section class="centered">
-    <mat-checkbox 
-        [formControl]="checkbox"
-        (blur)="updateCheckBoxErrorMessage()"     
-        checked="false"   
-      >
-      Agree to work for food
-      @if (checkbox.invalid) {
-        <mat-error>{{errorMessage()}}</mat-error>
-      }
-    </mat-checkbox>
-
+  <section> 
+    <label for="ConfirmPassword">Confirm Password: </label>
+    <input id="confirm_password" type="password" formControlName="confirm_password">
   </section>
-  
-  <section class="centered">        
-    <button 
-      mat-flat-button 
-      (click)="navigateToStep2()" 
-      [disabled]="email.invalid || password.invalid || confirm_password.invalid || checkbox.invalid">
-      Go to Step 2
-    </button>
+  <section> 
+    <input id="checkbox" type="checkbox"  formControlName="checkbox" value=false>
+    Agree to work for food
   </section>
-
+  <section>  
+    <button type="submit" mat-flat-button [disabled]="!loginForm.valid">Continue to Step 2</button>
+  </section>  
 </form>
