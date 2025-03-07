@@ -20,7 +20,7 @@ export class LoginComponent {
   formBuilder = inject(FormBuilder);
   
   loginForm = this.formBuilder.group({
-    login: ['', [Validators.required, Validators.email]],
+    login: ['',[Validators.required, Validators.email]],
     password: ['', [
       Validators.required, 
       Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z]).+$')]
@@ -28,7 +28,7 @@ export class LoginComponent {
     confirm_password: ['', [
       Validators.required]
     ],
-    checkbox: ['', Validators.requiredTrue],
+    checkbox: [false, Validators.requiredTrue],
     
   });
 
