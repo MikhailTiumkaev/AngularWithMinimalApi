@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { __values } from 'tslib';
 import { HttpClient } from '@angular/common/http';
 import { UserDTO } from '../models/user-dto';
 
@@ -18,7 +17,9 @@ export class DataService {
   }
 
   SaveUser(user: UserDTO) {
-    this.httpClient.post<UserDTO>('http://localhost:5002/user', user).subscribe(response => {
+    this.httpClient
+    .post<UserDTO>('http://localhost:5002/user', user)
+    .subscribe(response => {
       console.log('Added user:', response);
     });
   }
