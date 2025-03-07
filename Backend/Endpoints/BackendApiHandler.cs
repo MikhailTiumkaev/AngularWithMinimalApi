@@ -27,6 +27,6 @@ public static class BackendApiHandler
         IDBServices dbService, 
         CancellationToken ct = default)
     {
-        return await dbService.GetCountries(ct);        
+        return Results.Ok(await dbService.GetCountries(ct));        
     }
 }

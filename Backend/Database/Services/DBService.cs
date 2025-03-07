@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace  BackendApi.Database.Services;
 public class DBService  (AppDbContext _appDbContext, ILogger<DBService> _logger): IDBServices
 {
-    public async Task<IResult> GetCountries(CancellationToken ct)
+    public async Task<List<Country>> GetCountries(CancellationToken ct)
     {
         var countries = await _appDbContext.Countries
             .AsNoTracking()
             .Include(country => country.Provinces)
             .ToListAsync(cancellationToken: ct);
 
-        return Results.Ok(countries);
+        return countries;
     }
 
     public async Task SaveUser(User user, CancellationToken ct)
