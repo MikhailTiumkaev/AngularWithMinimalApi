@@ -1,7 +1,7 @@
-using BackendApi.Endpoints;
 using BackendApi.Database;
-using Microsoft.EntityFrameworkCore;
 using BackendApi.Configuration;
+using BackendApi.Endpoints.RouteExtension;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

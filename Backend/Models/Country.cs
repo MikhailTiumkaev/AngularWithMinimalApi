@@ -4,6 +4,6 @@ namespace BackendApi.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = default!;
-        public List<Province> Provinces { get; set; } = new();
+        public List<Province> Provinces { get; set; } = [];
     }
 }
